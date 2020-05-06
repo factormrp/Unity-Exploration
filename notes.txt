@@ -1,0 +1,61 @@
+5 May 2020:
+
+Classes as behavioural components:
+    Usually manifested as scripts that we attach to game objects
+    to drive behavior
+
+    Must inherit from Unity's MonoBehaviour class
+
+        the Start method is run at game load
+
+        the Update method is called once every frame while the game
+        is running
+        
+    the static keyword is used to specify class shared 
+    variables/methods
+        e.g. total enemies alive inside Enemy class
+
+Static classes:
+
+    We can't attach them to objects as can't be instantiated
+
+    these are generally used for utility classes
+        e.g. Maths class to define variables/methods
+
+
+Invoke(string funcName, float time) can be used to call functions
+after a set time interval has lapsed
+
+Input.GetKeyDown(KeyCode.Space) works as an event listener that returns
+boolean true when spacebar is pressed down by user
+
+Input.GetAxisRaw(string axisName) returns the non-smoothed return
+value associated with the key that is passed into it when its
+corresponding key is pressed
+
+The Mathf static class has loads of useful functions, including
+Mathf.Abs(float num)
+
+
+Vector2, Vector3 ... structs are available through the UnityEngine
+namespace. 
+
+    a struct is a grouping of related variables to form a custom
+    variable type 
+
+    e.g. a Vector3 struct can hold an Enemy object's velocity and
+    target position. This allows us to initialize 2 Vector3s as
+    opposed to 6 variables
+
+        initialized by using new structName(params...)
+
+
+The Input Manager found in Edit -> Product Settings lists all axes
+and the keys that correspond with them 
+
+
+The transform class can be used to modify the same values available
+in the transform component of a given GameObject
+
+the public keyword applied to a variable allows it to be accessed
+from the Inspector, allowing for easy manipulation during Play mode
