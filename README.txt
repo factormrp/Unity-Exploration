@@ -10,3 +10,13 @@ notes file
 Walked through first nine videos, learning about movement and vector structs
 
 1st Commit: Added all files from first learning game to remote repo
+
+
+
+9 May 2020:
+
+Continued watching the video series, completing videos 10-12.
+
+Researched Oculus Rift controller input documentation to get an understanding for the
+inputs I have available to me when I choose to implement my first VR game.
+

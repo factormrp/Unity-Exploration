@@ -59,3 +59,50 @@ in the transform component of a given GameObject
 
 the public keyword applied to a variable allows it to be accessed
 from the Inspector, allowing for easy manipulation during Play mode
+
+
+
+9 May 2020:
+
+transform.Rotate(vec) takes in Vector3 to specify rotation params 
+for object
+
+transform.Tranlate(vec) does the same to specify translation
+
+    By default the functions works in local space, meaning the
+    transformations will be made in reference to the object's
+    center of mass
+
+        this can be toggled to global space by adding the param
+        Space.World
+
+Vector3s have default constructors e.g.
+
+    Vector3.up = (0,1,0)    Vector3.zero = (0,0,0)  etc...
+
+There exists another base method from MonoBehaviour which delineates
+actions to be run on a fixed Update period, called FixedUpdate(){...}
+
+the function Time.fixedDeltaTime returns the length of the period
+between fixed updates
+
+    if called within FixedUpdate, it can be recognized as
+    Time.deltaTime
+
+GetComponent<compName>(params...) returns a component with specified
+parameters
+
+    used to add components to current object
+
+Random.Range(low,high) returns a random value between the low and
+high values
+
+    assumes integers unless one is passed as a float type
+
+GameObject name declares a new simple GameObject or Prefab
+
+    This can be used to generate prefabs in response to events
+
+Instantiate(GameObject, positionVec, rotationQtrn) returns a pointer
+to GameObject with specified position and rotation
+
