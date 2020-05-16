@@ -1,6 +1,7 @@
 5 May 2020:
 
 Classes as behavioural components:
+
     Usually manifested as scripts that we attach to game objects
     to drive behavior
 
@@ -24,21 +25,21 @@ Static classes:
 
 
 Invoke(string funcName, float time) can be used to call functions
-after a set time interval has lapsed
+    after a set time interval has lapsed
 
 Input.GetKeyDown(KeyCode.Space) works as an event listener that returns
-boolean true when spacebar is pressed down by user
+    boolean true when spacebar is pressed down by user
 
 Input.GetAxisRaw(string axisName) returns the non-smoothed return
-value associated with the key that is passed into it when its
-corresponding key is pressed
+    value associated with the key that is passed into it when its
+    corresponding key is pressed
 
 The Mathf static class has loads of useful functions, including
-Mathf.Abs(float num)
+    Mathf.Abs(float num)
 
 
 Vector2, Vector3 ... structs are available through the UnityEngine
-namespace. 
+    namespace. 
 
     a struct is a grouping of related variables to form a custom
     variable type 
@@ -51,21 +52,21 @@ namespace.
 
 
 The Input Manager found in Edit -> Product Settings lists all axes
-and the keys that correspond with them 
+    and the keys that correspond with them 
 
 
 The transform class can be used to modify the same values available
-in the transform component of a given GameObject
+    in the transform component of a given GameObject
 
 the public keyword applied to a variable allows it to be accessed
-from the Inspector, allowing for easy manipulation during Play mode
+    from the Inspector, allowing for easy manipulation during Play mode
 
 
 
 9 May 2020:
 
 transform.Rotate(vec) takes in Vector3 to specify rotation params 
-for object
+    for object
 
 transform.Tranlate(vec) does the same to specify translation
 
@@ -81,21 +82,21 @@ Vector3s have default constructors e.g.
     Vector3.up = (0,1,0)    Vector3.zero = (0,0,0)  etc...
 
 There exists another base method from MonoBehaviour which delineates
-actions to be run on a fixed Update period, called FixedUpdate(){...}
+    actions to be run on a fixed Update period, called FixedUpdate(){...}
 
 the function Time.fixedDeltaTime returns the length of the period
-between fixed updates
+    between fixed updates
 
     if called within FixedUpdate, it can be recognized as
     Time.deltaTime
 
 GetComponent<compName>(params...) returns a component with specified
-parameters
+    parameters
 
     used to add components to current object
 
 Random.Range(low,high) returns a random value between the low and
-high values
+    high values
 
     assumes integers unless one is passed as a float type
 
@@ -104,5 +105,34 @@ GameObject name declares a new simple GameObject or Prefab
     This can be used to generate prefabs in response to events
 
 Instantiate(GameObject, positionVec, rotationQtrn) returns a pointer
-to GameObject with specified position and rotation
+    to GameObject with specified position and rotation
+
+
+
+15 May 2020:
+
+Camera.main acceses the components of the main camera. These include:
+
+    aspect - returns the ascpect ratio of the camera 
+
+    orthographicSize - returns the 2D size of the viewable display
+
+For direct access to object dimensions, use transform.localScale
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
