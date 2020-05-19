@@ -1,138 +1,161 @@
-5 May 2020:
-
 Classes as behavioural components:
 
-    Usually manifested as scripts that we attach to game objects
-    to drive behavior
+    :- Usually manifested as scripts that we attach to game objects to drive behavior
 
-    Must inherit from Unity's MonoBehaviour class
+    :- Must inherit from Unity's MonoBehaviour class
 
-        the Start method is run at game load
+        :- the Start method is run at game load
 
-        the Update method is called once every frame while the game
-        is running
+        :- the Update method is called once every frame while the game is running        
+
+        :- the FixedUpdate method delineates actions to be run on a fixed Update period
+
+    :- the static keyword is used to specify class shared variables/methods
         
-    the static keyword is used to specify class shared 
-    variables/methods
         e.g. total enemies alive inside Enemy class
+
+    :- the public keyword applied to a variable allows it to be accessed from the Inspector
+    
+        :- These can be easily manipulated from the UI and also during Play mode
+
 
 Static classes:
 
-    We can't attach them to objects as can't be instantiated
+    :- We can't attach them to objects as can't be instantiated
 
-    these are generally used for utility classes
-        e.g. Maths class to define variables/methods
-
-
-Invoke(string funcName, float time) can be used to call functions
-    after a set time interval has lapsed
-
-Input.GetKeyDown(KeyCode.Space) works as an event listener that returns
-    boolean true when spacebar is pressed down by user
-
-Input.GetAxisRaw(string axisName) returns the non-smoothed return
-    value associated with the key that is passed into it when its
-    corresponding key is pressed
-
-The Mathf static class has loads of useful functions, including
-    Mathf.Abs(float num)
+    :- these are generally used for utility classes
+            
+        :- The Mathf static class has loads of useful functions, including Mathf.Abs(float num)
 
 
-Vector2, Vector3 ... structs are available through the UnityEngine
-    namespace. 
+Input Functionality:
 
-    a struct is a grouping of related variables to form a custom
-    variable type 
+    :- The Input Manager found in Edit -> Product Settings lists all axes and the keys that correspond with them 
 
-    e.g. a Vector3 struct can hold an Enemy object's velocity and
-    target position. This allows us to initialize 2 Vector3s as
-    opposed to 6 variables
+    :- Input.GetKeyDown(KeyCode.Space) works as an event listener that returns boolean true when spacebar is pressed down by user
 
-        initialized by using new structName(params...)
+    :- Input.GetAxisRaw(string axisName) returns the non-smoothed return value associated with the key that is passed into it when its corresponding key is pressed
 
+    :- event is an identifier for objects that trigger on specific input / series
 
-The Input Manager found in Edit -> Product Settings lists all axes
-    and the keys that correspond with them 
+        :- A System.Action object is an event listener that triggers specified instructions
 
+            :- += allows the definition of the instructions to be carried out
 
-The transform class can be used to modify the same values available
-    in the transform component of a given GameObject
-
-the public keyword applied to a variable allows it to be accessed
-    from the Inspector, allowing for easy manipulation during Play mode
+    :- OnTriggerEnter{2D,3D} are preloaded methods that act as event listeners for rigid body collisions
 
 
+Vectors and other Structs/Classes:
 
-9 May 2020:
+:- Vector2, Vector3 ... structs are available through the UnityEngine namespace. 
 
-transform.Rotate(vec) takes in Vector3 to specify rotation params 
-    for object
+    :- a struct is a grouping of related variables to form a custom variable type 
 
-transform.Tranlate(vec) does the same to specify translation
+        e.g. a Vector3 struct can hold an Enemy object's velocity and target positionVec
 
-    By default the functions works in local space, meaning the
-    transformations will be made in reference to the object's
-    center of mass
-
-        this can be toggled to global space by adding the param
-        Space.World
-
-Vector3s have default constructors e.g.
-
-    Vector3.up = (0,1,0)    Vector3.zero = (0,0,0)  etc...
-
-There exists another base method from MonoBehaviour which delineates
-    actions to be run on a fixed Update period, called FixedUpdate(){...}
-
-the function Time.fixedDeltaTime returns the length of the period
-    between fixed updates
-
-    if called within FixedUpdate, it can be recognized as
-    Time.deltaTime
-
-GetComponent<compName>(params...) returns a component with specified
-    parameters
-
-    used to add components to current object
-
-Random.Range(low,high) returns a random value between the low and
-    high values
-
-    assumes integers unless one is passed as a float type
-
-GameObject name declares a new simple GameObject or Prefab
-
-    This can be used to generate prefabs in response to events
-
-Instantiate(GameObject, positionVec, rotationQtrn) returns a pointer
-    to GameObject with specified position and rotation
+    :- To access elements, use x,y,z for the 1st,2nd,3rd data fields, respectively 
 
 
+    :- Vectors have default constructors 
 
-15 May 2020:
+        e.g. Vector3.up = (0,1,0)    Vector3.zero = (0,0,0)     Vector3.forward = (1,0,0)
 
-Camera.main acceses the components of the main camera. These include:
+        e.g. Vector2.down = (0,-1)
 
-    aspect - returns the ascpect ratio of the camera 
+    :- GameObject name declares a new simple GameObject or Prefab
 
-    orthographicSize - returns the 2D size of the viewable display
+        :- This can be used to generate prefabs in response to events
 
-For direct access to object dimensions, use transform.localScale
+        :- Instantiate(GameObject, positionVec, rotationQtrn) returns a pointer to GameObject with specified position and rotation
+
+        :- GetComponent<compName>(params...) returns a component with specified parameters
+
+            :- used to add components to current object
+
+                :- can be leveraged for upgrades and economy mechanics
+
+        :- FindObjectOfType<typename>() returns an object of the specified type
+
+            :- can be used to find an event or a non-instantiable object
+
+        :- SetActive(boolean val) toggles the active property of an object
+
+            :- can be used to hide/reveal assets
+
+    :- Text type is used to work with static text in game mechanics
+
+        :- Requires the UnityEngine.UI library
+
+        :- can be used to enhance screens and update HUD
+
+    :- SceneManager type is used to work with loading in screens
+
+        :- Requires the UnityEngine.SceneManagement library
+        
+        :- Can be used to reload after end of game or transition to new levels 
+
+            :- LoadScene(int index) loads the scene in the scene list at the specified index
 
 
+Transform Functionality:
+
+    :- The transform class can be used to modify the same values available in the transform component of a given GameObject
+
+        :- By default the functions works in local space, meaning the transformations will be made in reference to the object's center of mass
+
+            :- this can be toggled to global space by adding the param Space.World
+
+            :- For direct access to object dimensions, use transform.localScale
+
+    :- transform.Rotate(Vector) takes in Vector3 to specify rotation params for object
+
+    :- transform.Translate(Vector) does the same to specify translation
 
 
+Time Functionality:
+
+    :- Invoke(string funcName, float time) can be used to call functions after a set time interval has lapsed
+
+    :- the function Time.fixedDeltaTime returns the length of the period between fixed updates
+
+        :- if called within FixedUpdate, it can be recognized as Time.deltaTime
 
 
+Math Functionality:
+
+:- Mathf.Abs(float num) returns the absolute value of the given parameters
+
+:- Mathf.Lerp(float a, float b, float increment) performs linear interpolation between two points a and b by a fixed increment
+
+    :- This can be leveraged as a tool for steady increments or level adjustments
+
+:- Mathf.Clamp01(float expression) returns a value between 0 and 1
+
+    :- This can be leveraged for capping off growth 
+
+:- Mathf.RoundToInt(float value) returns the rounded interger representation of a given value 
 
 
+RNG Functionality: 
+
+    :- Random.Range(low,high) returns a random value between the low and high values
+
+        :- assumes integers unless one is passed as a float type
 
 
+Camera Functionality:
+
+:- Camera.main acceses the components of the main camera. These include:
+
+    :- aspect - returns the ascpect ratio of the camera 
+
+    :- orthographicSize - returns the 2D size of the viewable display
 
 
+String Functionality:
 
+    :- ToString() returns a string representation of the given GameObject
 
-
-
+        :- only works for those that have the functionality implemented 
 
 

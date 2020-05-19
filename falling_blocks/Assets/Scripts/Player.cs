@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public event System.Action OnPlayerDeath;
     public float speed = 10f;
     float wrapLimit;
     // Start is called before the first frame update
@@ -25,5 +26,14 @@ public class Player : MonoBehaviour
 
         if(transform.position.x < -wrapLimit)
             transform.position = new Vector2(wrapLimit,transform.position.y);
+
+    }
+
+    void OnTriggerEnter2D(Collider2D other) {
+        if(other.tag == "falling block"){
+            if(OnPlayerDeath != null)
+                OnPlayerDeath();
+            Destroy(gameObject);
+        }
     }
 }
