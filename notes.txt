@@ -10,6 +10,14 @@ Classes as behavioural components:
 
         :- the FixedUpdate method delineates actions to be run on a fixed Update period
 
+        :- StartCoroutine are part of the unity engine and all couroutines return an IEnumerator
+
+            :- allows us to use yield return 
+
+                :- can be paired with WaitForSeconds(float f) that waits set time between updates 
+
+                :- null; until next frame       CoroutineName(...); until coroutine finishes 
+
     :- the static keyword is used to specify class shared variables/methods
         
         e.g. total enemies alive inside Enemy class
@@ -45,7 +53,13 @@ Input Functionality:
     :- OnTriggerEnter{2D,3D} are preloaded methods that act as event listeners for rigid body collisions
 
 
-Vectors and other Structs/Classes:
+Data Structures:
+
+:- Reference types have two classifiers out and ref which are used for pass by reference
+
+    :- ref requires the data to have been initialized, out does not
+
+:- Value types copy values during assignment and as such are compared by value for boolean expressions 
 
 :- Vector2, Vector3 ... structs are available through the UnityEngine namespace. 
 
@@ -96,6 +110,7 @@ Vectors and other Structs/Classes:
 
             :- LoadScene(int index) loads the scene in the scene list at the specified index
 
+    :- Lists are vectors
 
 Transform Functionality:
 
@@ -159,3 +174,20 @@ String Functionality:
         :- only works for those that have the functionality implemented 
 
 
+Raycasting Functionality:
+
+    :- Ray name = new Ray (Vector3 origin, Vector3 direction) initializes a ray 
+
+    :- RaycastHit is value type
+
+        :- Physics.Raycast(Ray name, out RaycastHit name, float maxDistance) returns bool for collision
+
+            :- can be paired with Debug.DrawLine(Vector3 start, Vector3 end, Color.color) to draw line b/w objects 
+
+            :- The ray interacts with a collider component on object i.e. no collider = no interation 
+
+                :- QueryTriggerInteraction.method can be passed in as param to add more functionality with trigger 
+
+    :- LayerMask is struct used to specify what assets the ray interacts with in scene 
+
+        :- new layers can be made from inspector
