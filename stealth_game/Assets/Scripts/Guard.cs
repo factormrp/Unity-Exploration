@@ -5,30 +5,48 @@ using UnityEngine;
 public class Guard : MonoBehaviour
 {
     public Transform pathHolder;
-    public float speed;
-  
+    public float speed = 10;
+    public float wait = 0.3f;
+    public float turnSpeed = 90;
+
     void Start(){
         Vector3[] waypts = new Vector3[pathHolder.childCount];
         for(int i=0; i<waypts.Length; i++){
             waypts[i] = pathHolder.GetChild(i).position;
-            waypts[i].y += transform.position.y;
+            waypts[i] = new Vector3(waypts[i].x, transform.position.y, waypts[i].z);
         }
         StartCoroutine(FollowPath(waypts));
     }
-    IEnumerator Move(Vector3 destination, float speed){
-        while(transform.position != destination){
+    IEnumerator FollowPath(Vector3[] waypoints){
+        transform.position = waypoints[0];
+        int current = 1;
+        Vector3 destination = waypoints[current];
+        transform.LookAt(destination);
+        
+        while(true){
             transform.position = Vector3.MoveTowards(transform.position,
                 destination, speed*Time.deltaTime);
+            if(transform.position == destination){
+                current = (current + 1) % waypoints.Length;
+                destination = waypoints[current];
+                yield return new WaitForSeconds(wait);    
+                yield return StartCoroutine(TurnToFace(destination));
+            }
             yield return null;
         }
     }
-    IEnumerator FollowPath(Vector3[] waypoints){
-        while(true){
-            foreach(Vector3 pt in waypoints){
-                yield return StartCoroutine(Move(pt,speed));
-            }
+    IEnumerator TurnToFace(Vector3 target){
+        Vector3 directionToTarget = (target - transform.position).normalized;
+        float targetAngle = 90 - Mathf.Atan2(directionToTarget.z, directionToTarget.x)*Mathf.Rad2Deg;
+
+        while(Mathf.Abs(Mathf.DeltaAngle(transform.eulerAngles.y, targetAngle)) > 0.05f ){
+            float angle = Mathf.MoveTowardsAngle(transform.eulerAngles.y, targetAngle,
+                turnSpeed*Time.deltaTime);
+            transform.eulerAngles = Vector3.up*angle;
+            yield return null;
         }
     }
+
     void OnDrawGizmos(){
 
         Vector3 startPos = pathHolder.GetChild(0).position;
